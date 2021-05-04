@@ -1,16 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import '../../style/css/mainView.css';
 
-function App() {
+function MainView() {
   return (
-    <div className="App">
+    <div className="main-view">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
-          className="App-link"
+          className="App-link"s
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
@@ -22,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainView;
