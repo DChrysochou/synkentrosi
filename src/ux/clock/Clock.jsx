@@ -3,31 +3,27 @@ import React from 'react';
 import moment from 'moment-timezone';
 
 class Clock extends React.Component{
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      time: '',
-      timezone: "Canada/Newfoundland"
+      // timezone won't change and the time state is internally managed
+      time: moment.tz(this.props.timezone).format('LT') 
     }
-    this.clicked = this.clicked.bind(this)
   }
 
   componentDidMount = () => {
     setInterval(() => {
         this.setState({
-          time: moment.tz(this.state.timezone).format('LTS'),
+          time: moment.tz(this.props.timezone).format('LT'),
         });
       }, 1000);
   }
 
-  clicked() {
-    console.log('xyzzy');
-  }
-
   render() {
     return(
-      <div id="clock" onClick={this.clicked}>
-        <h1 className="clock">{this.state.time}</h1>
+      <div className="clock">
+        <div className="clock-time">{this.state.time}</div>
+        <div className="clock-region">{this.props.region}</div>
       </div>
     )
   }
