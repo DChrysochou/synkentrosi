@@ -1,6 +1,7 @@
 import React from 'react'
 import WorldClocks from '../clock/WorldClocks';
 import Pomodoro from '../pomodoro/Pomodoro';
+import ToDoList from '../todo/ToDoList';
 
 import '../../style/css/MainView.css';
 
@@ -18,6 +19,9 @@ class MainView extends React.Component {
         </div>
         <div id="center-box">
           <Pomodoro/>
+        </div>
+        <div id="bottom-panel">
+          <ToDoList/>
         </div>
       </div>
     );
