@@ -23,8 +23,6 @@ import Timer from './Timer';
  * A button to pause the timer without resetting (v2)
  **/
 
-
-
 class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +46,7 @@ class Pomodoro extends React.Component {
         isRunning: !this.state.isRunning,
         timerInterval: setInterval(() => {
           this.decrementTimer();
-          this.updateLabels();
+          this.updateTimerState();
         }, 1000)
       });
     } else {
@@ -69,7 +67,7 @@ class Pomodoro extends React.Component {
     });
   }
 
-  updateLabels = () => {
+  updateTimerState = () => {
     if (this.state.remainingTime === 0) {
       this.state.timerInterval && clearInterval(this.state.timerInterval);
 
@@ -94,7 +92,6 @@ class Pomodoro extends React.Component {
   render() {
     return (
       <div id="pomodoro">
-
         <Timer 
           activeTimer={this.state.activeTimer}
           remainingTime={this.state.remainingTime}
@@ -104,7 +101,6 @@ class Pomodoro extends React.Component {
           startStop={this.startStop}
           isRunning={this.state.isRunning}
         />
-
       </div>
     )
   }
