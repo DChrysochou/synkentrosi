@@ -1,5 +1,6 @@
 import React from 'react'
 import WorldClocks from '../clock/WorldClocks';
+import Pomodoro from '../pomodoro/Pomodoro';
 
 import '../../style/css/MainView.css';
 
@@ -16,7 +17,7 @@ class MainView extends React.Component {
           <WorldClocks/>
         </div>
         <div id="center-box">
-          
+          <Pomodoro/>
         </div>
       </div>
     );
