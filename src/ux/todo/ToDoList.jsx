@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import Form from "./Form";
 import List from "./List";
@@ -46,14 +47,13 @@ class ToDoList extends React.Component {
   }
 
   fetchData = async () => {
-    let response = await fetch("list.json", {
+    let response = await axios.get('http://localhost:8080/todos', {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     });
-    let json = await response.json();
-    return json;
+    return await response.data;
   }
 
   handleSubmit = (title) => {
