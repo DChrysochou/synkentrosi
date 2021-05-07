@@ -16,7 +16,7 @@ function Timer(props) {
   return (
     <div className="timer">
       <div className="timer-container">
-        <h1>{props.activeTimer}</h1>
+        <div>{props.activeTimer}</div>
         <div id="timer-countdown">{formatTime(props.remainingTime)}</div>
       </div>
     </div>
