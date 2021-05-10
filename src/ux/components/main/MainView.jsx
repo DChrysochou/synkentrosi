@@ -3,8 +3,6 @@ import WorldClocks from '../clock/WorldClocks';
 import Pomodoro from '../pomodoro/Pomodoro';
 import ToDoList from '../todo/ToDoList';
 
-import '../../style/css/MainView.css';
-
 class MainView extends React.Component {
   constructor(props) {
     super(props);
