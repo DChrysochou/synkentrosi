@@ -16,7 +16,10 @@ mongoose.connect(database.db, { useNewUrlParser: true })
 );
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(cors());
+
 app.use('/todos', todoRoute) // This is where we decide that requests to /todos are handled by todoRoute
 
 let port = 8080;
