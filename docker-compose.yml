@@ -1,0 +1,21 @@
+version: "2"
+services:
+  ux:
+    build: ./ux/
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - srv
+    volumes:
+      - ./ux/src/:/ux/src/
+    stdin_open: true
+  srv:
+    build: ./srv/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
