@@ -1,11 +1,11 @@
 version: "2"
 services:
   ux:
-    build: ./src/ux/
+    build: ./ux/
     ports: 
       - "3000:3000"
   srv:
-    build: ./src/srv/
+    build: ./srv/
     ports:
       - "8080:8080"
     depends_on:
