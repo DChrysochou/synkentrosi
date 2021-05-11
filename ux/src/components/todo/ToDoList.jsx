@@ -11,6 +11,7 @@ import List from "./List";
  * Display a list of ToDo items
  * Provide a way to submit new items to the list
  *    Add button that opens into an input?
+ * Provide a way to delete items from the list
  * Each item should have a checkbox that will set it as "done"
  *    Should be able to "uncheck" items as well
  *    Done items should be crossed out; move to bottom of list?
@@ -59,12 +60,20 @@ class ToDoList extends React.Component {
   handleSubmit = (title) => {
     if (!title || !title.trim()) return null;
 
-    this.setState(prevState => ({
-      items: [...prevState.items, {
-        title: title,
-        key: Date.now()
-      }]
-    }));
+    axios.post('http://localhost:8080/todos/create', {
+      title: title,
+      completed: false
+    })
+    .then((res) => {
+      this.setState(prevState => ({
+        items: [...prevState.items, {
+          title: res.data.title,
+          key: res.data._id
+        }]
+      }));
+    }).catch((error) => {
+        console.log(error)
+    });
   }
 
   handleChecked = (e) => {
