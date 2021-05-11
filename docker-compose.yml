@@ -4,6 +4,11 @@ services:
     build: ./ux/
     ports: 
       - "3000:3000"
+    depends_on: 
+      - srv
+    volumes:
+      - ./ux/src/:/ux/src/
+    stdin_open: true
   srv:
     build: ./srv/
     ports:
