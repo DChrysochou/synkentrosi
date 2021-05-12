@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 
 import Form from "./Form";
 import List from "./List";
+import delegate from "./todoDelegate";
 
 /**
  * ToDo List
@@ -38,47 +38,57 @@ class ToDoList extends React.Component {
 
     this.handleChecked = this.handleChecked.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount = async () => {
-    let data = await this.fetchData();
+    let response = await delegate.getList();
+    let data = response && response.data;
     this.setState(prevState => ({
       items: [...prevState.items, ...data]
     }));
   }
 
-  fetchData = async () => {
-    let response = await axios.get('http://localhost:8080/todos', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    });
-    return await response.data;
+  updateListWithNewItem = (data) => {
+    this.setState(prevState => ({
+      items: [...prevState.items, {
+        title: data.title,
+        _id: data._id
+      }]
+    }));
+  }
+
+  updateListWithRemovedItem = (removedId) => {
+    this.setState(prevState => ({ 
+      items: prevState.items.filter(todo => todo._id !== removedId) 
+    })); 
   }
 
   handleSubmit = (title) => {
     if (!title || !title.trim()) return null;
 
-    axios.post('http://localhost:8080/todos/create', {
+    delegate.submit({
       title: title,
       completed: false
-    })
-    .then((res) => {
-      this.setState(prevState => ({
-        items: [...prevState.items, {
-          title: res.data.title,
-          key: res.data._id
-        }]
-      }));
-    }).catch((error) => {
-        console.log(error)
-    });
+    },
+      (res) => { res.data && this.updateListWithNewItem(res.data); },
+      (err) => { console.log(err); }
+    );
   }
 
   handleChecked = (e) => {
     let input = e.target;
     let onOff = input.checked;
+  }
+
+  handleDelete = (e) => {
+    let todoItem = e.target.parentElement;
+    let idToDelete = todoItem && todoItem.id;
+    delegate.remove(
+      idToDelete, 
+      (res) => { res.data && this.updateListWithRemovedItem(res.data._id); },
+      (err) => { console.log(err); }
+    );
   }
   
   render() {
@@ -92,6 +102,7 @@ class ToDoList extends React.Component {
           <List
             entries={this.state.items}
             handleChecked={this.handleChecked}
+            handleDelete={this.handleDelete}
           />
         </div>
       </div>
