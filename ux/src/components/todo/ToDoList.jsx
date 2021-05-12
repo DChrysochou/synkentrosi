@@ -8,10 +8,10 @@ import delegate from "./todoDelegate";
  * ToDo List
  * 
  * Requirements:
- * Display a list of ToDo items
- * Provide a way to submit new items to the list
+ * Display a list of ToDo items (DONE)
+ * Provide a way to submit new items to the list (DONE)
  *    Add button that opens into an input?
- * Provide a way to delete items from the list
+ * Provide a way to delete items from the list (DONE)
  * Each item should have a checkbox that will set it as "done"
  *    Should be able to "uncheck" items as well
  *    Done items should be crossed out; move to bottom of list?
@@ -64,6 +64,19 @@ class ToDoList extends React.Component {
     })); 
   }
 
+  updateListWithToggle = (toggleId, onOff) => {
+    let items = [...this.state.items];
+    let index = items.findIndex((item)=> { return item._id === toggleId; });
+    if (index !== -1) {
+      let item = {
+        ...items[index],
+        completed: onOff
+      }
+      items[index] = item;
+      this.setState({items});
+    }
+  }
+
   handleSubmit = (title) => {
     if (!title || !title.trim()) return null;
 
@@ -77,8 +90,18 @@ class ToDoList extends React.Component {
   }
 
   handleChecked = (e) => {
+    e.preventDefault();
+
     let input = e.target;
+    let idToUpdate = e.target.parentElement && e.target.parentElement.id;
     let onOff = input.checked;
+    delegate.toggle({
+      id: idToUpdate,
+      state: onOff
+    },
+      (res) => { this.updateListWithToggle(res.data._id, onOff); },
+      (err) => { console.log(err); }
+    );
   }
 
   handleDelete = (e) => {

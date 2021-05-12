@@ -31,4 +31,14 @@ router.route('/:id').delete((req, res, next) => {
   })
 });
 
+router.route('/:id').post((req, res, next) => {
+  todo.findByIdAndUpdate(req.params.id, { completed: req.body.state }, 
+    (error, data) => {
+      if (error) return next(error)
+      else {
+        res.json(data);
+      }
+   })
+});
+
 module.exports = router;
