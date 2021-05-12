@@ -15,12 +15,15 @@ class Form extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state.input);
+    this.setState({
+      input: '' 
+    });
   }
 
   render () {
     return (
       <form id="todo-form" onSubmit={this.onSubmit.bind(this)}>
-        <input placeholder="Enter a TODO" value={this.state.value} onChange={this.onInput} type="text"/>
+        <input placeholder="Enter a TODO" value={this.state.input} onChange={this.onInput} type="text"/>
         <button type="submit">Add</button>
       </form>
     )
