@@ -20,6 +20,7 @@ import delegate from "./todoDelegate";
  * Items should be saved to a DB
  *    Implement MongoDB to save between sessions?
  *    Will likely require an API, should be added to srv folder
+ * Add a datestamp to each ToDo item so that we can clear completed >24H ones on load
  * 
  * 
  * Good To Haves:
