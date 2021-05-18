@@ -1,12 +1,21 @@
-# Getting Started with Create React App
+# Synkentrosi - Productivity Tool
+**Synkentrosi** (**συγκέντρωση** in Greek) translates to, essentially, "Mental concentration". Inspired by the fantastic Momentum Dashboard, the concept is the same (A page you can leave your browser on to remind you to focus), but tweaked to my preferences.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Requirements
+1. Docker
+2. SASS
+## Setup
+After cloning the repo, from the project directory, run: 
 
-## Available Scripts
+```
+sass ux/src/style/sass:ux/src/style/css
+docker-compose up --build
+``` 
 
-In the project directory, you can run:
+This will start the development server. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm start`
+## Configuration
+### Backgrounds
+The daily backgrounds are saved in the `srv/assets/backgrounds` directory. The server will provide a new one from the folder every 24 hours.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To add new ones to the rotation, simply add them to the folder in your local repo.

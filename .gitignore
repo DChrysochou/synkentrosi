@@ -22,5 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-srv/assets/*
+srv/assets/backgrounds/*
 ux/src/style/css/*
