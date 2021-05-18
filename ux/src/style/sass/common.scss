@@ -25,3 +25,8 @@ $colors: (
     transform: translateY(2px);
   }
 }
+
+.common-button-small {
+  @extend .common-button;
+  padding: 10px 15px;
+}

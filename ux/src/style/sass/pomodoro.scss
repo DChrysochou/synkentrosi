@@ -19,6 +19,8 @@
 
     #timer-button {
       @extend .common-button;
+      position: relative;
+      z-index: 3;
     }
   }
 }
