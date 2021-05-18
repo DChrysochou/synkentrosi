@@ -5,6 +5,7 @@ let database = require('./database/db');
 let createError = require('http-errors');
 
 let todoRoute = require('./routes/todo.routes');
+let bgRoute = require('./routes/bg.routes');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(database.db, { useNewUrlParser: true })
@@ -19,8 +20,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
+app.use(express.static('assets'));
 
-app.use('/todos', todoRoute) // This is where we decide that requests to /todos are handled by todoRoute
+app.use('/todos', todoRoute);
+app.use('/background', bgRoute);
 
 let port = 8080;
 app.listen(port, () => {
