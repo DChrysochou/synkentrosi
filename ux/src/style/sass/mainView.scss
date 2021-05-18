@@ -2,14 +2,8 @@
   padding: 20px;
   height: 100%;
   width: 100%;
-}
+  color: white;
 
-div#center-box {
-  position: absolute;
-  left: 47%;
-  top: 40%;
-}
-
-div#bottom-panel {
-
+  display: flex;
+  justify-content: space-between;
 }

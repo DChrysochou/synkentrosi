@@ -1,0 +1,25 @@
+@import "common.scss";
+
+#pomodoro-container {
+  text-align: center; 
+  font-size: 80px;
+  font-weight: bold;
+  align-self: center;
+  padding-left: 60px;
+
+  #timer {
+    text-shadow: 1px 1px 5px black;
+  }
+
+  #timer-countdown {
+    font-size: 112px;
+  }
+
+  .controller {
+    font-size: 12px;
+
+    #timer-button {
+      @extend .common-button;
+    }
+  }
+}

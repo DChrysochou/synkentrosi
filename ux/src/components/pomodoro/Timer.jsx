@@ -14,7 +14,7 @@ const formatTime = (remainingTime) => {
 
 function Timer(props) {
   return (
-    <div className="timer">
+    <div id="timer">
       <div className="timer-container">
         <div>{props.activeTimer}</div>
         <div id="timer-countdown">{formatTime(props.remainingTime)}</div>

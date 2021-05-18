@@ -34,15 +34,9 @@ class MainView extends React.Component {
           backgroundRepeat: 'no-repeat'        
         }}
       >
-        <div id="top-panel">
-          <WorldClocks/>
-        </div>
-        <div id="center-box">
-          <Pomodoro/>
-        </div>
-        <div id="bottom-panel">
-          <ToDoList/>
-        </div>
+        <ToDoList/>
+        <Pomodoro/>
+        <WorldClocks/>
       </div>
     );
   }

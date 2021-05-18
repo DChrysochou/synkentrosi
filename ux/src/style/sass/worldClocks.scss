@@ -1,8 +1,11 @@
-.world-clock-container {
+#world-clock-container {
   display: flex;
   justify-content: flex-end;
+  font-size: 18px;
+  font-weight: bold;
 
   .clock{
     margin-left: 25px;
+    text-shadow: 1px 1px 5px black;
   }
 }
