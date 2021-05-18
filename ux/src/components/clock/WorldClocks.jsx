@@ -1,5 +1,7 @@
 import Clock from './Clock';
 
+import "../../style/css/worldClocks.css";
+
 function WorldClocks() {
   return (
     <div className="world-clock-container">

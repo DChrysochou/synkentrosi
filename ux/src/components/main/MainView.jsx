@@ -26,7 +26,14 @@ class MainView extends React.Component {
   
   render() {
     return (
-      <div className="main-container" style={{backgroundImage: "url(" + this.state.bgPath + ")"}}>
+      <div className="main-container" 
+        style={{
+          backgroundImage: "url(" + this.state.bgPath + ")",
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'        
+        }}
+      >
         <div id="top-panel">
           <WorldClocks/>
         </div>
