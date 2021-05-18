@@ -14,7 +14,16 @@ class MainView extends React.Component {
 
   componentDidMount = async () => {
     let bgPath = await this.getDailyBackgroundPath();
-    this.setState({bgPath: bgPath});
+    this.setState({
+      bgPath: bgPath,
+      showApp: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        removeScreen: true
+      });
+    }, 200);
   }
 
   getDailyBackgroundPath = async () => {
@@ -34,9 +43,17 @@ class MainView extends React.Component {
           backgroundRepeat: 'no-repeat'        
         }}
       >
-        <ToDoList/>
-        <Pomodoro/>
-        <WorldClocks/>
+        <div className={`fade-in-screen 
+          ${this.state.showApp ? "fade-out" : ""}
+          ${this.state.removeScreen ? "begone" : ""}
+        `}></div>
+        <div id="top-panel">
+          <ToDoList/>
+          <WorldClocks/>
+        </div>
+        <div id="center-panel">
+          <Pomodoro/>
+        </div>
       </div>
     );
   }

@@ -4,6 +4,8 @@ import Form from "./Form";
 import List from "./List";
 import delegate from "./todoDelegate";
 
+import '../../style/css/ToDoList.css';
+
 /**
  * ToDo List
  * 
@@ -118,9 +120,6 @@ class ToDoList extends React.Component {
   render() {
     return (
       <div id="todo-list">
-        <div className="todo-header">
-          TODO List
-        </div> 
         <div className="todo-container">
           <Form onSubmit={this.handleSubmit} />
           <List

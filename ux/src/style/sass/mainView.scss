@@ -4,6 +4,33 @@
   width: 100%;
   color: white;
 
-  display: flex;
-  justify-content: space-between;
+  .fade-in-screen {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: white;
+    margin: -20px;
+    z-index: 2;
+    transition: background 0.25s ease-in;
+
+    &.fade-out {
+      background: transparent;
+    }
+
+    &.begone {
+      display:none;
+    }
+  }
+
+  div#top-panel {
+    display: flex;
+    justify-content: space-between;  
+  }
+
+  div#center-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+  }
 }
