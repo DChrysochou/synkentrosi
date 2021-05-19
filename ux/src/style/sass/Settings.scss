@@ -1,0 +1,19 @@
+@import 'common.scss';
+
+#settings-container {
+  text-align: right;
+  margin: 15px 25px;
+
+  #settings-flyout {
+    @extend .panel;
+    width: 300px;
+    text-align: left;
+    transition: all 0.25s ease;
+
+    &.open { max-height: 100px; }
+    &.closed {
+      max-height: 0px;
+      padding: 0px;
+    }
+  }
+}

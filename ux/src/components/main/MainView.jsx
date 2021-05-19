@@ -2,6 +2,8 @@ import React from 'react'
 import WorldClocks from '../clock/WorldClocks';
 import Pomodoro from '../pomodoro/Pomodoro';
 import ToDoList from '../todo/ToDoList';
+import Greeting from '../greeting/Greeting';
+import Settings from '../settings/Settings';
 import delegate from './bgDelegate';
 
 import '../../style/css/mainView.css';
@@ -53,6 +55,10 @@ class MainView extends React.Component {
         </div>
         <div id="center-panel">
           <Pomodoro/>
+          <Greeting/>
+        </div>
+        <div id="bottom-panel">
+          <Settings/>
         </div>
       </div>
     );

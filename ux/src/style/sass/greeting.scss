@@ -1,0 +1,9 @@
+@import 'common.scss';
+
+#greeting-container {
+  text-align: center; 
+  font-size: 80px;
+  font-weight: bold;
+  align-self: center;
+  text-shadow: $sublte-text-shadow;
+}
