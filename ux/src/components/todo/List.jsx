@@ -1,12 +1,14 @@
 import React from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
 
 function List(props) {
   return (
     <div>
-      <div id="todo-list">
+      <div className="todo-list-items">
         {props.entries.map(({ title, _id, completed }) => (
           <React.Fragment key={_id}>
-            <div id={_id} className="todo-item">
+            <div id={_id} className={`todo-item ${completed ? "complete" : ""}`}>
+              <button className="todo-delete" onClick={props.handleDelete}><FaTrashAlt/></button>
               <input 
                 type="checkbox" 
                 className="todo-checkbox" 
@@ -14,7 +16,6 @@ function List(props) {
                 checked={completed ? true : false}
               ></input>
               <span>{title}</span>
-              <button className="todo-delete" onClick={props.handleDelete}>Garbage</button>
             </div>
           </React.Fragment>
         ))}

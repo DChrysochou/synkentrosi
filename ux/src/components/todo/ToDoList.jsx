@@ -108,8 +108,9 @@ class ToDoList extends React.Component {
   }
 
   handleDelete = (e) => {
-    let todoItem = e.target.parentElement;
+    let todoItem = e.currentTarget.parentElement;
     let idToDelete = todoItem && todoItem.id;
+    if (!idToDelete) return;
     delegate.remove(
       idToDelete, 
       (res) => { res.data && this.updateListWithRemovedItem(res.data._id); },

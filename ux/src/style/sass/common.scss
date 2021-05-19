@@ -1,5 +1,6 @@
 $colors: (
   default: #535353,
+  default-dark: #3a3a3a,
   active: #9b00ca,
 );
 
@@ -26,7 +27,61 @@ $colors: (
   }
 }
 
+// For use with just an icon
 .common-button-small {
   @extend .common-button;
-  padding: 10px 15px;
+  height: 34px;
+  width: 35px;
+  padding: 0;
+  padding-top: 4px;
+  border-radius: 50%;
+}
+
+.icon-button {
+  @extend .common-button;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+
+  &:hover {
+    color: map-get($colors, active);
+    background-color: transparent;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.22);
+  }
+}
+
+// custom scroll-bar
+@mixin custom-scroll-bar() {
+  &::-webkit-scrollbar {
+    border-radius: 10px;
+    height: 10px;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+}
+
+// no scroll bar
+@mixin no-scroll-bar() {
+  &::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 0;
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    height: 0;
+    width: 0;
+  }
 }

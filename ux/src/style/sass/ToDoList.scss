@@ -1,6 +1,38 @@
 @import "common.scss";
 
 #todo-list {
+  .todo-container {
+    width: 445px;
+    max-height: 735px;
+    padding: 15px;
+    background-color: map-get($colors, default-dark);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    overflow-y: auto;
+
+    @include custom-scroll-bar;
+  }
+
+  .todo-list-items {
+    .todo-item {
+      margin-top: 5px;
+
+      &.complete {
+        text-decoration: line-through;
+      }
+
+      .todo-checkbox {
+        margin-right: 7px;
+      }
+
+      .todo-delete {
+        @extend .icon-button;
+        margin-right:5px;
+        margin-top: 2px;
+      }
+    }
+  }
+
   #todo-form {
     // TODO set a media query to max out the height
     input {
