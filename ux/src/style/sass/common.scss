@@ -30,11 +30,13 @@ $colors: (
 // For use with just an icon
 .common-button-small {
   @extend .common-button;
-  height: 34px;
+  height: 35px;
   width: 35px;
   padding: 0;
-  padding-top: 4px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon-button {

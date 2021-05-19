@@ -16,10 +16,7 @@
   .todo-list-items {
     .todo-item {
       margin-top: 5px;
-
-      &.complete {
-        text-decoration: line-through;
-      }
+      &.complete { text-decoration: line-through; }
 
       .todo-checkbox {
         margin-right: 7px;
@@ -34,9 +31,11 @@
   }
 
   #todo-form {
-    // TODO set a media query to max out the height
+    display:flex;
+    justify-content: space-between;
+
     input {
-      width: 335px;
+      width: 370px;
       padding: 7px 0;
       border: 0;
       border-bottom: 2px solid #ffffff;
@@ -49,7 +48,6 @@
 
     button {
       @extend .common-button-small;
-      margin-left: 15px;
     }
   }
 }
