@@ -12,11 +12,15 @@ class Clock extends React.Component{
   }
 
   componentDidMount = () => {
-    setInterval(() => {
+    this.timerInterval = setInterval(() => {
         this.setState({
           time: moment.tz(this.props.timezone).format('LT'),
         });
       }, 1000);
+  }
+
+  componentWillUnmount = () => {
+    this.timerInterval && clearInterval(this.timerInterval);
   }
 
   render() {

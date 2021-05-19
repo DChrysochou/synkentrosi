@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaPlus } from 'react-icons/fa';
 
 class Form extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Form extends React.Component {
     return (
       <form id="todo-form" onSubmit={this.onSubmit.bind(this)}>
         <input placeholder="Enter a TODO" value={this.state.input} onChange={this.onInput} type="text"/>
-        <button type="submit">Add</button>
+        <button type="submit"><FaPlus/></button>
       </form>
     )
   }

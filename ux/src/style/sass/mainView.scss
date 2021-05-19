@@ -1,0 +1,41 @@
+.main-container {
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  color: #ffffff;
+
+  .fade-in-screen {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #ffffff;
+    margin: -20px;
+    z-index: 4;
+    transition: background 0.25s ease-in;
+
+    &.fade-out { background: transparent; }
+    &.begone { display:none; }
+  }
+
+  div#top-panel {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  div#center-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+
+    @media (max-width: 1280px) {
+      left: 30%;
+    }
+
+    @media (max-width: 985px) {
+      left: 45%;
+    }
+  }
+}

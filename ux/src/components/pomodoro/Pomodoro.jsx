@@ -2,6 +2,8 @@ import React from 'react';
 import StartStopButton from './StartStopButton';
 import Timer from './Timer';
 
+import '../../style/css/pomodoro.css';
+
 /**
  * Pomodoro Timer
  * 
@@ -91,7 +93,7 @@ class Pomodoro extends React.Component {
 
   render() {
     return (
-      <div id="pomodoro">
+      <div id="pomodoro-container">
         <Timer 
           activeTimer={this.state.activeTimer}
           remainingTime={this.state.remainingTime}

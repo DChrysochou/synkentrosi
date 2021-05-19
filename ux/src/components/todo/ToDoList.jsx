@@ -4,6 +4,8 @@ import Form from "./Form";
 import List from "./List";
 import delegate from "./todoDelegate";
 
+import '../../style/css/ToDoList.css';
+
 /**
  * ToDo List
  * 
@@ -106,8 +108,9 @@ class ToDoList extends React.Component {
   }
 
   handleDelete = (e) => {
-    let todoItem = e.target.parentElement;
+    let todoItem = e.currentTarget.parentElement;
     let idToDelete = todoItem && todoItem.id;
+    if (!idToDelete) return;
     delegate.remove(
       idToDelete, 
       (res) => { res.data && this.updateListWithRemovedItem(res.data._id); },
@@ -117,10 +120,7 @@ class ToDoList extends React.Component {
   
   render() {
     return (
-      <div className="todo-list">
-        <div className="todo-header">
-          TODO List
-        </div> 
+      <div id="todo-list">
         <div className="todo-container">
           <Form onSubmit={this.handleSubmit} />
           <List
