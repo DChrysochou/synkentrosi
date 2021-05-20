@@ -13,19 +13,27 @@ class Settings extends React.Component {
     };
 
     this.handleClick.bind(this);
+    this.handleNameChange.bind(this);
   }
 
   handleClick = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
+  handleNameChange = (name) => {
+    this.props.changeName(name);
+  }
+
   render() {
     return (
       <div id="settings-container">
         <div id="settings-flyout" className={`${this.state.isOpen ? "open" : "closed"}`}>
-          <Flyout/>
+          <Flyout 
+            onSubmit={this.handleNameChange}
+            name={this.props.name}
+          />
         </div>
-        <button id="settings-button" className="icon-button" onClick={this.handleClick}><FiSettings/></button>
+        <button id="settings-button" className="icon-button-small" onClick={this.handleClick}><FiSettings/></button>
       </div>
     );
   }

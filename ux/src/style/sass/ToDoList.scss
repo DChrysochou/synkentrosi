@@ -18,7 +18,7 @@
       }
 
       .todo-delete {
-        @extend .icon-button;
+        @extend .icon-button-small;
         margin-right:5px;
         margin-top: 2px;
       }
@@ -42,7 +42,7 @@
     }
 
     button {
-      @extend .common-button-small;
+      @extend .icon-button;
     }
   }
 }

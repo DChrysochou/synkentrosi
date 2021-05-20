@@ -11,7 +11,11 @@ import '../../style/css/mainView.css';
 class MainView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userName: localStorage.getItem("name") || ''
+    };
+    
+    this.changeName.bind(this);
   }
 
   componentDidMount = async () => {
@@ -34,6 +38,13 @@ class MainView extends React.Component {
         path = 'http://localhost:8080/backgrounds/' + bg;
     return path;
   }
+
+  changeName = (name) => {
+    localStorage.setItem('name', name);
+    this.setState({
+      userName: name
+    })
+  }
   
   render() {
     return (
@@ -55,10 +66,13 @@ class MainView extends React.Component {
         </div>
         <div id="center-panel">
           <Pomodoro/>
-          <Greeting/>
+          <Greeting name={this.state.userName}/>
         </div>
         <div id="bottom-panel">
-          <Settings/>
+          <Settings 
+            changeName={this.changeName}
+            name={this.state.userName}
+          />
         </div>
       </div>
     );

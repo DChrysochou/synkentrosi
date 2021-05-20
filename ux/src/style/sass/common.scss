@@ -29,8 +29,14 @@ $sublte-text-shadow: 1px 1px 5px black;
   }
 }
 
-// For use with just an icon
 .common-button-small {
+  @extend .common-button;
+  padding: 5px 15px;
+  font-size: 12px;
+}
+
+// For use with just an icon
+.icon-button {
   @extend .common-button;
   height: 35px;
   width: 35px;
@@ -41,7 +47,7 @@ $sublte-text-shadow: 1px 1px 5px black;
   align-items: center;
 }
 
-.icon-button {
+.icon-button-small {
   @extend .common-button;
   padding: 0;
   background: none;

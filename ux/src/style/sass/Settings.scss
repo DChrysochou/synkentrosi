@@ -4,16 +4,44 @@
   text-align: right;
   margin: 15px 25px;
 
+  #settings-button {
+    font-size: 28px;
+  }
+
   #settings-flyout {
     @extend .panel;
     width: 300px;
     text-align: left;
     transition: all 0.25s ease;
+    overflow: hidden;
 
     &.open { max-height: 100px; }
     &.closed {
       max-height: 0px;
       padding: 0px;
+    }
+
+    .flyout-container {
+      #name-form {
+        display: flex;
+        justify-content: space-between;
+
+        input {
+          width: 195px;
+          padding: 5px 0;
+          border: 0;
+          border-bottom: 2px solid #ffffff;
+          outline: 0;
+
+          font-size: 16px;
+          color: #ffffff;
+          background: transparent;
+        }
+
+        button {
+          @extend .common-button-small;
+        }
+      }
     }
   }
 }
