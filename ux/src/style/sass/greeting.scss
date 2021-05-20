@@ -1,0 +1,10 @@
+@import 'common.scss';
+
+#greeting-container {
+  margin-top: 35px;
+  text-align: center; 
+  font-size: 64px;
+  font-weight: bold;
+  align-self: center;
+  text-shadow: $sublte-text-shadow;
+}

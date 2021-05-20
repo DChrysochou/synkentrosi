@@ -2,6 +2,8 @@ import React from 'react'
 import WorldClocks from '../clock/WorldClocks';
 import Pomodoro from '../pomodoro/Pomodoro';
 import ToDoList from '../todo/ToDoList';
+import Greeting from '../greeting/Greeting';
+import Settings from '../settings/Settings';
 import delegate from './bgDelegate';
 
 import '../../style/css/mainView.css';
@@ -9,7 +11,11 @@ import '../../style/css/mainView.css';
 class MainView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userName: localStorage.getItem("name") || ''
+    };
+    
+    this.changeName.bind(this);
   }
 
   componentDidMount = async () => {
@@ -32,6 +38,13 @@ class MainView extends React.Component {
         path = 'http://localhost:8080/backgrounds/' + bg;
     return path;
   }
+
+  changeName = (name) => {
+    localStorage.setItem('name', name);
+    this.setState({
+      userName: name
+    })
+  }
   
   render() {
     return (
@@ -53,6 +66,13 @@ class MainView extends React.Component {
         </div>
         <div id="center-panel">
           <Pomodoro/>
+          <Greeting name={this.state.userName}/>
+        </div>
+        <div id="bottom-panel">
+          <Settings 
+            changeName={this.changeName}
+            name={this.state.userName}
+          />
         </div>
       </div>
     );

@@ -4,6 +4,8 @@ $colors: (
   active: #9b00ca,
 );
 
+$sublte-text-shadow: 1px 1px 5px black;
+
 .common-button {
   padding: 15px 30px;
   border: 0;
@@ -27,8 +29,14 @@ $colors: (
   }
 }
 
-// For use with just an icon
 .common-button-small {
+  @extend .common-button;
+  padding: 5px 15px;
+  font-size: 12px;
+}
+
+// For use with just an icon
+.icon-button {
   @extend .common-button;
   height: 35px;
   width: 35px;
@@ -39,7 +47,7 @@ $colors: (
   align-items: center;
 }
 
-.icon-button {
+.icon-button-small {
   @extend .common-button;
   padding: 0;
   background: none;
@@ -50,6 +58,15 @@ $colors: (
     background-color: transparent;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.22);
   }
+}
+
+.panel {
+  padding: 15px;
+  background-color: map-get($colors, default-dark);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  overflow-y: auto;
+  opacity: 0.9;
 }
 
 // custom scroll-bar
@@ -67,23 +84,5 @@ $colors: (
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-  }
-}
-
-// no scroll bar
-@mixin no-scroll-bar() {
-  &::-webkit-scrollbar {
-    height: 0;
-    width: 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    height: 0;
-    width: 0;
-  }
-
-  &::-webkit-scrollbar-track {
-    height: 0;
-    width: 0;
   }
 }
