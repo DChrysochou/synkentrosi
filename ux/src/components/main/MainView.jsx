@@ -29,7 +29,7 @@ class MainView extends React.Component {
       this.setState({
         removeScreen: true
       });
-    }, 200);
+    }, 750);
   }
 
   getDailyBackgroundPath = async () => {

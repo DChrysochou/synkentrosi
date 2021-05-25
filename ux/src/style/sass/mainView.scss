@@ -11,7 +11,7 @@
     background-color: #ffffff;
     margin: -20px;
     z-index: 4;
-    transition: background 0.25s ease-in;
+    transition: background 0.75s ease-in;
 
     &.fade-out { background: transparent; }
     &.begone { display:none; }
