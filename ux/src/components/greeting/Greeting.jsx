@@ -1,12 +1,14 @@
 import React from 'react';
 
+import {greetings} from '../utils/greetingsList';
 import '../../style/css/greeting.css';
 
 function Greeting(props) {
   var name = props.name || "Human";
+  var greeting = greetings.list[Math.floor(Math.random() * greetings.list.length)];
   return (
     <div id="greeting-container">
-      Get after it, {name}.
+      {greeting}, {name}.
     </div>
   );
 }
