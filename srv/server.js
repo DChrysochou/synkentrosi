@@ -6,9 +6,10 @@ let createError = require('http-errors');
 
 let todoRoute = require('./routes/todo.routes');
 let bgRoute = require('./routes/bg.routes');
+let quoteRoute = require('./routes/quotes.routes');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(database.db, { useNewUrlParser: true })
+mongoose.connect(database.db, { useNewUrlParser: true, useFindAndModify: true })
   .then(() => {
     console.log('Open the pod bay doors please, Hal.')
   }, error => {
@@ -24,6 +25,7 @@ app.use(express.static('assets'));
 
 app.use('/todos', todoRoute);
 app.use('/background', bgRoute);
+app.use('/quotes', quoteRoute);
 
 let port = 8080;
 app.listen(port, () => {

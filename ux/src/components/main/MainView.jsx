@@ -4,6 +4,7 @@ import Pomodoro from '../pomodoro/Pomodoro';
 import ToDoList from '../todo/ToDoList';
 import Greeting from '../greeting/Greeting';
 import Settings from '../settings/Settings';
+import Quotes from '../quotes/Quotes';
 import delegate from './bgDelegate';
 
 import {greetings} from '../utils/greetingUtil';
@@ -78,6 +79,7 @@ class MainView extends React.Component {
           />
         </div>
         <div id="bottom-panel">
+          <Quotes/>
           <Settings 
             changeName={this.changeName}
             name={this.state.userName}

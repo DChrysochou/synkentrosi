@@ -3,7 +3,7 @@
 #todo-list {
   .todo-container {
     width: 445px;
-    max-height: 735px;
+    max-height: 710px;
     @extend .panel;    
     @include custom-scroll-bar;
   }
