@@ -6,6 +6,8 @@ import Greeting from '../greeting/Greeting';
 import Settings from '../settings/Settings';
 import delegate from './bgDelegate';
 
+import {greetings} from '../utils/greetingUtil';
+
 import '../../style/css/mainView.css';
 
 class MainView extends React.Component {
@@ -29,7 +31,11 @@ class MainView extends React.Component {
       this.setState({
         removeScreen: true
       });
-    }, 200);
+    }, 750);
+
+    this.setState({
+      greeting: greetings.getRandom()
+    })
   }
 
   getDailyBackgroundPath = async () => {
@@ -66,7 +72,10 @@ class MainView extends React.Component {
         </div>
         <div id="center-panel">
           <Pomodoro/>
-          <Greeting name={this.state.userName}/>
+          <Greeting 
+            name={this.state.userName}
+            greeting={this.state.greeting}
+          />
         </div>
         <div id="bottom-panel">
           <Settings 
