@@ -6,7 +6,7 @@ import Greeting from '../greeting/Greeting';
 import Settings from '../settings/Settings';
 import delegate from './bgDelegate';
 
-import {greetings} from '../utils/greetingsList';
+import {greetings} from '../utils/greetingUtil';
 
 import '../../style/css/mainView.css';
 
@@ -33,9 +33,8 @@ class MainView extends React.Component {
       });
     }, 750);
 
-    let greeting = greetings.list[Math.floor(Math.random() * greetings.list.length)];
     this.setState({
-      greeting: greeting
+      greeting: greetings.getRandom()
     })
   }
 
