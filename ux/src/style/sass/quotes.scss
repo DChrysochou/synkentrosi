@@ -1,0 +1,13 @@
+@import 'common.scss';
+
+#quote-container {
+  padding-bottom:10px;
+  align-self: flex-end;
+  text-shadow: $sublte-text-shadow;
+  opacity: 1;
+  transition: opacity 0.75s ease-in;
+
+  &.faded {
+    opacity: 0;
+  }
+}
