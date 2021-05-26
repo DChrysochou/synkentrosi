@@ -1,6 +1,7 @@
 let express = require('express'),
     fs = require('fs'),
     path = require('path'),
+    utils = require('../utils'),
     router = express.Router();
 
 router.route('/').get((req, res) => {
@@ -12,11 +13,8 @@ getRandomBackground = () => {
   let bgPath = path.join(__dirname, '..', 'assets', 'backgrounds');
   let files = fs.readdirSync(bgPath);
   if (files) {
-    let date = new Date(),
-        days = date.getTime() / (1000*60*60*24), 
-        idx = Math.floor(days) % files.length;
-      
-    return files[idx];
+    let index = utils.getDailyIndex(files);
+    return files[index];
   }
 }
 
