@@ -4,6 +4,7 @@ import Pomodoro from '../pomodoro/Pomodoro';
 import ToDoList from '../todo/ToDoList';
 import Greeting from '../greeting/Greeting';
 import Settings from '../settings/Settings';
+import Focus from '../focus/Focus';
 import delegate from './bgDelegate';
 
 import {greetings} from '../utils/greetingUtil';
@@ -68,6 +69,7 @@ class MainView extends React.Component {
         `}></div>
         <div id="top-panel">
           <ToDoList/>
+          <Focus/>
           <WorldClocks/>
         </div>
         <div id="center-panel">
