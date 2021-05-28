@@ -9,7 +9,7 @@ let bgRoute = require('./routes/bg.routes');
 let quoteRoute = require('./routes/quotes.routes');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(database.db, { useNewUrlParser: true, useFindAndModify: true })
+mongoose.connect(database.db, { useNewUrlParser: true, useFindAndModify: false })
   .then(() => {
     console.log('Open the pod bay doors please, Hal.')
   }, error => {
