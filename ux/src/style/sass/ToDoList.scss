@@ -1,11 +1,42 @@
 @import "common.scss";
 
 #todo-list {
-  .todo-container {
-    width: 445px;
-    max-height: 710px;
-    @extend .panel;    
-    @include custom-scroll-bar;
+  @extend .panel;    
+  @include custom-scroll-bar;
+  width: 465px;
+  max-height: 710px;
+  display: flex;
+
+  .todo-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    margin-left: -15px;
+    margin-right: 5px;
+
+    .todo-tab {
+      text-orientation: upright;
+      writing-mode: vertical-lr;
+
+      background-color: map-get($colors, default);
+      margin-bottom: 10px;
+      padding: 5px;
+
+      border-left: 5px orchid solid;
+      cursor: pointer;
+
+      transition: background-color 0.2s ease-out, border 0.2s ease-out;
+
+      &:hover { background-color: map-get($colors, default-light); }
+      &.active {
+        border-left: 5px map-get($colors, active) solid;
+        background-color: map-get($colors, active-dark);
+
+        &:hover { background-color: map-get($colors, active-light); }
+
+      }
+    }
   }
 
   .todo-list-items {

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Form from "./Form";
 import List from "./List";
+import Tab from "./Tab";
 import delegate from "./todoDelegate";
 
 import '../../style/css/ToDoList.css';
@@ -36,12 +37,15 @@ class ToDoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      lists: ['Work', 'Personal'],
+      activeList: 0
     }
 
     this.handleChecked = this.handleChecked.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.switchList = this.switchList.bind(this);
   }
 
   componentDidMount = async () => {
@@ -117,10 +121,30 @@ class ToDoList extends React.Component {
       (err) => { console.log(err); }
     );
   }
+
+  switchList = (target) => {
+    if (target.classList.contains('active')) return;
+
+    let list = target.parentNode;
+    let index = Array.prototype.indexOf.call(list.children, target);
+    this.setState({
+      activeList: index
+    }) 
+  }
   
   render() {
     return (
       <div id="todo-list">
+        <div className="todo-tabs">
+          {this.state.lists.map(function(name, index){
+            return <Tab
+              name={name}
+              key={index}
+              active={this.state.activeList === index}
+              switchList={this.switchList}
+            />
+          }, this)}
+        </div>
         <div className="todo-container">
           <Form onSubmit={this.handleSubmit} />
           <List
