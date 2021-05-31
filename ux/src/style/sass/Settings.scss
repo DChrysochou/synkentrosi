@@ -15,14 +15,24 @@
     transition: all 0.25s ease;
     overflow: hidden;
 
-    &.open { max-height: 100px; }
+    &.open { max-height: 150px; }
     &.closed {
       max-height: 0px;
       padding: 0px;
     }
 
     .flyout-container {
-      #name-form {
+      .settings-item {
+        margin-bottom:10px;
+      }
+
+      label {
+        font-size: 12px;
+        font-weight: lighter;
+        font-style: italic;
+      }
+
+      .input-container {
         display: flex;
         justify-content: space-between;
 

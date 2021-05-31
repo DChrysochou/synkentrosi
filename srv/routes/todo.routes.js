@@ -3,13 +3,19 @@ let express = require('express'),
 
 let todo = require('../models/todo-schema');
 
-router.route('/').get((req, res) => {
-  todo.find((error, data) => {
+router.route('/').get(async (req, res) => {
+  let data = await todo.find((error, data) => {
     if (error) return next(error);
-    else {
-      res.json(data);
-    }
-  })
+    else return data;
+  });
+
+  let lists = await todo.distinct("list");
+  let dataObj = {
+    "items": data,
+    "lists": lists
+  }
+  
+  res.send(dataObj);
 })
 
 router.route('/create').post((req, res, next) => {

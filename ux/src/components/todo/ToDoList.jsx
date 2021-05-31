@@ -38,7 +38,7 @@ class ToDoList extends React.Component {
     super(props);
     this.state = {
       items: [],
-      lists: ['Work', 'Personal'],
+      lists: [],
       activeList: 0
     }
 
@@ -49,10 +49,12 @@ class ToDoList extends React.Component {
   }
 
   componentDidMount = async () => {
-    let response = await delegate.getList();
+    let response = await delegate.getAllItems();
     let data = response && response.data;
+    let lists = (data.lists.length === 0) ?  ["today"] : data.lists;
     this.setState(prevState => ({
-      items: [...prevState.items, ...data]
+      items: [...prevState.items, ...data.items],
+      lists: [...prevState.lists, ...lists]
     }));
   }
 
@@ -87,9 +89,12 @@ class ToDoList extends React.Component {
   handleSubmit = (title) => {
     if (!title || !title.trim()) return null;
 
+    let activeList = this.state.lists[this.state.activeList];
+
     delegate.submit({
       title: title,
-      completed: false
+      completed: false,
+      list: activeList
     },
       (res) => { res.data && this.updateListWithNewItem(res.data); },
       (err) => { console.log(err); }
@@ -120,6 +125,10 @@ class ToDoList extends React.Component {
       (res) => { res.data && this.updateListWithRemovedItem(res.data._id); },
       (err) => { console.log(err); }
     );
+  }
+
+  createNewList = (name) => {
+    console.log(name);
   }
 
   switchList = (target) => {

@@ -1,35 +1,39 @@
 import React from 'react';
+import Form from './Form';
 
 class Flyout extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: ''
-    };
+    this.state = {};
+
+    this.handleNameSubmit.bind(this);
+    this.handleTodoListSubmit.bind(this);
   }
 
-  onInput = (e) => this.setState({
-    input: e.target.value
-  });
+  handleNameSubmit = (name) => {
+    this.props.hanleNameChange(name);
+  }
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    this.props.onSubmit(this.state.input);
+  handleTodoListSubmit = (name) => {
+    this.props.handleTodoListSubmit(name);
   }
 
   render() {
     return (
       <div className="flyout-container">
-        <form id="name-form" className="settings-item" onSubmit={this.onSubmit.bind(this)}>
-          <input 
-            id="name-input"
-            placeholder={`${this.props.name ? this.props.name : "Enter your preferred name"}`}
-            value={this.state.input}
-            onChange={this.onInput} 
-            type="text"
-          />
-          <button type="submit">submit</button>
-        </form>
+        <Form // Name input
+          formID="name"
+          formLabel="Name"
+          onSubmit={this.handleNameSubmit}
+          placeholder="Enter your preferred name"
+          defaultValue={this.props.name}
+        />
+        <Form // Todo list
+          formID="todo"
+          formLabel="Todo List"
+          onSubmit={this.handleTodoListSubmit}
+          placeholder="Create new Todo list"
+        />
       </div>
     );
   }

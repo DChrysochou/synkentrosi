@@ -5,7 +5,7 @@ const todoDelegate = {
   /**
    * @returns {Object} List of ToDo items
    */
-  getList: () => {
+  getAllItems: () => {
     return axios.get('http://localhost:8080/todos', {
       headers: {
         'Content-Type': 'application/json',
