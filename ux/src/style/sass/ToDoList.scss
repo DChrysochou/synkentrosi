@@ -1,18 +1,22 @@
 @import "common.scss";
 
 #todo-list {
-  @extend .panel;    
+  @extend .panel;
   @include custom-scroll-bar;
-  width: 465px;
+  padding-left: 0px;
+  max-width: 465px;
   max-height: 710px;
   display: flex;
+  
+  .todo-container {
+    margin-left: 15px;
+  }
 
   .todo-tabs {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: flex-start;
-    margin-left: -15px;
     margin-right: 5px;
 
     .todo-tab {
