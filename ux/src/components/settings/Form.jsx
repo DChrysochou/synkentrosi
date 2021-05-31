@@ -15,12 +15,15 @@ class Form extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state.input);
+    this.setState({
+      input: '' 
+    });
   }
 
   render() {
     return (
       <div>
-        <form id={`${this.props.formID}-input`} className="settings-item" onSubmit={this.onSubmit.bind(this)}>
+        <form id={`${this.props.formID}-form`} className="settings-item" onSubmit={this.onSubmit.bind(this)}>
           <label htmlFor={this.props.formID}>{this.props.formLabel}</label>
           <div className="input-container">
             <input 
