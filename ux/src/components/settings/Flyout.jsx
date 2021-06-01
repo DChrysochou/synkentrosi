@@ -29,7 +29,7 @@ class Flyout extends React.Component {
           defaultValue={this.props.name}
         />
         <Form // Todo list
-          formID="todo"
+          formID="todo-list"
           formLabel="Todo List"
           onSubmit={this.handleTodoListSubmit}
           placeholder="Create new Todo list"

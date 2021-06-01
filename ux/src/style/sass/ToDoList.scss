@@ -23,7 +23,7 @@
       text-orientation: upright;
       writing-mode: vertical-lr;
 
-      background-color: map-get($colors, default);
+      background-color: map-get($colors, default-dark);
       padding: 5px;
 
       border-left: 5px orchid solid;
@@ -35,7 +35,7 @@
       &:hover { background-color: map-get($colors, default-light); }
       &.active {
         border-left: 5px map-get($colors, active) solid;
-        background-color: map-get($colors, active-dark);
+        background-color: map-get($colors, default);
 
         &:hover { background-color: map-get($colors, active-light); }
 

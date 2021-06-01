@@ -38,7 +38,7 @@ class ToDoList extends React.Component {
     super(props);
     this.state = {
       items: [],
-      lists: [],
+      lists: JSON.parse(localStorage.getItem("lists")) || [],
       activeList: 0
     }
 
@@ -51,7 +51,7 @@ class ToDoList extends React.Component {
   componentDidMount = async () => {
     let response = await delegate.getAllItems();
     let data = response && response.data;
-    let lists = (data.lists.length === 0) ?  ["today"] : data.lists;
+    let lists = (data.lists.length === 0) ? [] : data.lists;
     this.setState(prevState => ({
       items: [...prevState.items, ...data.items],
       lists: [...prevState.lists, ...lists]
@@ -128,7 +128,12 @@ class ToDoList extends React.Component {
   }
 
   createNewList = (name) => {
-    console.log(name);
+    let currentLists = this.state.lists;
+    let newLists = [...currentLists, name];
+    localStorage.setItem('lists', JSON.stringify(newLists));
+    this.setState({
+      lists: newLists
+    })
   }
 
   switchList = (target) => {
