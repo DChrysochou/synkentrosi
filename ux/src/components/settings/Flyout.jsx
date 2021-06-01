@@ -15,6 +15,7 @@ class Flyout extends React.Component {
   }
 
   handleTodoListSubmit = (name) => {
+    if (!name) return;
     this.props.handleTodoListSubmit(name);
   }
 

@@ -38,7 +38,7 @@ class ToDoList extends React.Component {
     super(props);
     this.state = {
       items: [],
-      lists: JSON.parse(localStorage.getItem("lists")) || [],
+      lists: [],
       activeList: 0
     }
 
@@ -49,11 +49,13 @@ class ToDoList extends React.Component {
   }
 
   componentDidMount = async () => {
-    let response = await delegate.getAllItems();
-    let data = response && response.data;
-    let lists = (data.lists.length === 0) ? [] : data.lists;
+    let itemData = await delegate.getAllItems();
+    let listsData = await delegate.getLists();
+    let items = itemData && itemData.data;
+    let lists = listsData && listsData.data.filter((list)=> { return !!list.name });
+
     this.setState(prevState => ({
-      items: [...prevState.items, ...data.items],
+      items: [...prevState.items, ...items],
       lists: [...prevState.lists, ...lists]
     }));
   }
@@ -116,10 +118,14 @@ class ToDoList extends React.Component {
     );
   }
 
+  getIDToRemove = (e) => {
+    let item = e.currentTarget.parentElement;
+    let idToDelete = item && item.id;
+    return idToDelete;
+  }
+
   handleDelete = (e) => {
-    let todoItem = e.currentTarget.parentElement;
-    let idToDelete = todoItem && todoItem.id;
-    if (!idToDelete) return;
+    let idToDelete = this.getIDToRemove(e);
     delegate.remove(
       idToDelete, 
       (res) => { res.data && this.updateListWithRemovedItem(res.data._id); },
@@ -128,12 +134,20 @@ class ToDoList extends React.Component {
   }
 
   createNewList = (name) => {
-    let currentLists = this.state.lists;
-    let newLists = [...currentLists, name];
-    localStorage.setItem('lists', JSON.stringify(newLists));
-    this.setState({
-      lists: newLists
-    })
+    delegate.newList(
+      {name: name}, 
+      (res) => { this.setState(prevState => ({ lists: [...prevState.lists, res.data] })); },
+      (err) => { console.log(err); }
+    );
+  }
+
+  deleteList = (e) => {
+    let idToDelete = this.getIDToRemove(e);
+    delegate.deleteList(
+      idToDelete, 
+      (res) => { this.setState(prevState => ({ lists: prevState.lists.filter(list => list._id !== res.data._id) })); },
+      (err) => { console.log(err); }
+    );
   }
 
   switchList = (target) => {
@@ -150,12 +164,14 @@ class ToDoList extends React.Component {
     return (
       <div id="todo-list">
         <div className="todo-tabs">
-          {this.state.lists.map(function(name, index){
+          {this.state.lists.map(function({name, _id}, index){
             return <Tab
               name={name}
+              id={_id}
               key={index}
               active={this.state.activeList === index}
               switchList={this.switchList}
+              handleDelete={this.deleteList}
             />
           }, this)}
         </div>

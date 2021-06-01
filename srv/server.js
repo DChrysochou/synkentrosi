@@ -5,6 +5,7 @@ let database = require('./database/db');
 let createError = require('http-errors');
 
 let todoRoute = require('./routes/todo.routes');
+let listsRoute = require('./routes/lists.routes');
 let bgRoute = require('./routes/bg.routes');
 let quoteRoute = require('./routes/quotes.routes');
 
@@ -24,6 +25,7 @@ app.use(cors());
 app.use(express.static('assets'));
 
 app.use('/todos', todoRoute);
+app.use('/lists', listsRoute);
 app.use('/background', bgRoute);
 app.use('/quotes', quoteRoute);
 
