@@ -38,6 +38,7 @@ class ToDoList extends React.Component {
     super(props);
     this.state = {
       items: [],
+      visibleItems: [],
       lists: [],
       activeList: 0
     }
@@ -58,54 +59,47 @@ class ToDoList extends React.Component {
       items: [...prevState.items, ...items],
       lists: [...prevState.lists, ...lists]
     }));
+
+    let filteredItems = this.getFilteredList(this.state.activeList, items);
+    this.setState({ visibleItems: filteredItems });
   }
 
-  updateListWithNewItem = (data) => {
-    this.setState(prevState => ({
-      items: [...prevState.items, {
-        title: data.title,
-        _id: data._id
-      }]
-    }));
+  getFilteredList = (index, items = this.state.items) => {
+    let list = this.state.lists[index],
+        todoItems = items,
+        filteredList = todoItems.filter((item) => {
+          return item.list === list._id;
+        });
+
+    return filteredList;
   }
 
-  updateListWithRemovedItem = (removedId) => {
+  updateListWithChanges = async () => {
+    let itemData = await delegate.getAllItems();
+    let items = itemData && itemData.data;
+    let filteredItems = this.getFilteredList(this.state.activeList, items);
     this.setState(prevState => ({ 
-      items: prevState.items.filter(todo => todo._id !== removedId) 
-    })); 
-  }
-
-  updateListWithToggle = (toggleId, onOff) => {
-    let items = [...this.state.items];
-    let index = items.findIndex((item)=> { return item._id === toggleId; });
-    if (index !== -1) {
-      let item = {
-        ...items[index],
-        completed: onOff
-      }
-      items[index] = item;
-      this.setState({items});
-    }
+      items: items,
+      visibleItems: filteredItems
+    }));
   }
 
   handleSubmit = (title) => {
     if (!title || !title.trim()) return null;
 
     let activeList = this.state.lists[this.state.activeList];
-
     delegate.submit({
       title: title,
       completed: false,
-      list: activeList
+      list: activeList._id
     },
-      (res) => { res.data && this.updateListWithNewItem(res.data); },
+      (res) => { res.data && this.updateListWithChanges("todo"); },
       (err) => { console.log(err); }
     );
   }
 
   handleChecked = (e) => {
     e.preventDefault();
-
     let input = e.target;
     let idToUpdate = e.target.parentElement && e.target.parentElement.id;
     let onOff = input.checked;
@@ -113,7 +107,7 @@ class ToDoList extends React.Component {
       id: idToUpdate,
       state: onOff
     },
-      (res) => { this.updateListWithToggle(res.data._id, onOff); },
+      (res) => { this.updateListWithChanges("todo"); },
       (err) => { console.log(err); }
     );
   }
@@ -128,7 +122,7 @@ class ToDoList extends React.Component {
     let idToDelete = this.getIDToRemove(e);
     delegate.remove(
       idToDelete, 
-      (res) => { res.data && this.updateListWithRemovedItem(res.data._id); },
+      (res) => { res.data && this.updateListWithChanges("todo"); },
       (err) => { console.log(err); }
     );
   }
@@ -155,8 +149,10 @@ class ToDoList extends React.Component {
 
     let list = target.parentNode;
     let index = Array.prototype.indexOf.call(list.children, target);
+    let filteredItems = this.getFilteredList(index);
     this.setState({
-      activeList: index
+      activeList: index,
+      visibleItems: filteredItems
     }) 
   }
   
@@ -178,7 +174,7 @@ class ToDoList extends React.Component {
         <div className="todo-container">
           <Form onSubmit={this.handleSubmit} />
           <List
-            entries={this.state.items}
+            entries={this.state.visibleItems}
             handleChecked={this.handleChecked}
             handleDelete={this.handleDelete}
           />
