@@ -15,8 +15,9 @@ class Quotes extends React.Component {
   componentDidMount = async () => {
     let quoteData = await delegate.getQuote();
     let quote = quoteData.data;
+    let author = quote.author || "Unknown";
     this.setState({
-      author: "~ " + quote.author,
+      author: "~ " + author,
       text: quote.text,
       fadeIn: true
     })

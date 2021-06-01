@@ -14,6 +14,7 @@ class Settings extends React.Component {
 
     this.handleClick.bind(this);
     this.handleNameChange.bind(this);
+    this.handleTodoListSubmit.bind(this);
   }
 
   handleClick = () => {
@@ -24,12 +25,17 @@ class Settings extends React.Component {
     this.props.changeName(name);
   }
 
+  handleTodoListSubmit = (name) => {
+    this.props.createTodoList(name);
+  }
+
   render() {
     return (
       <div id="settings-container">
         <div id="settings-flyout" className={`${this.state.isOpen ? "open" : "closed"}`}>
           <Flyout 
-            onSubmit={this.handleNameChange}
+            handleNameChange={this.handleNameChange}
+            handleTodoListSubmit={this.handleTodoListSubmit}
             name={this.props.name}
           />
         </div>

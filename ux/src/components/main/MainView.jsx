@@ -18,6 +18,7 @@ class MainView extends React.Component {
       userName: localStorage.getItem("name") || ''
     };
     
+    this.todoList = React.createRef();
     this.changeName.bind(this);
   }
 
@@ -53,6 +54,10 @@ class MainView extends React.Component {
     })
   }
   
+  createTodoList = (name) => {
+    this.todoList.current.createNewList(name);
+  }
+  
   render() {
     return (
       <div className="main-container" 
@@ -68,7 +73,7 @@ class MainView extends React.Component {
           ${this.state.removeScreen ? "begone" : ""}
         `}></div>
         <div id="top-panel">
-          <ToDoList/>
+          <ToDoList ref={this.todoList}/>
           <WorldClocks/>
         </div>
         <div id="center-panel">
@@ -82,6 +87,7 @@ class MainView extends React.Component {
           <Quotes/>
           <Settings 
             changeName={this.changeName}
+            createTodoList={this.createTodoList}
             name={this.state.userName}
           />
         </div>

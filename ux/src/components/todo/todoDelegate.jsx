@@ -5,7 +5,7 @@ const todoDelegate = {
   /**
    * @returns {Object} List of ToDo items
    */
-  getList: () => {
+  getAllItems: () => {
     return axios.get('http://localhost:8080/todos', {
       headers: {
         'Content-Type': 'application/json',
@@ -22,42 +22,87 @@ const todoDelegate = {
    */
   submit: (todo, callback, errback) => {
     axios.post('http://localhost:8080/todos/create', todo)
-    .then((res) => {
-      callback && callback(res);
-    }).catch((error) => {
-      errback && errback(error);
-    });
+      .then((res) => {
+        callback && callback(res);
+      }).catch((error) => {
+        errback && errback(error);
+      });
   },
 
   /**
- * Deletion of Todo Item
- * @param {String} id The id of the item to delete
- * @param {function} callback Response handler
- * @param {function} errback Error handler
- */
+   * Deletion of Todo Item
+   * @param {String} id The id of the item to delete
+   * @param {function} callback Response handler
+   * @param {function} errback Error handler
+   */
   remove: (id, callback, errback) => {
     axios.delete('http://localhost:8080/todos/' + id)
-    .then((res) => {
-      callback && callback(res);
-    }).catch((error) => {
-      errback && errback(error);
+      .then((res) => {
+        callback && callback(res);
+      }).catch((error) => {
+        errback && errback(error);
+      });
+  },
+
+  /**
+   * Deletion of Todo Item
+   * @param {Object} checked The updated state of the item and the ID being modified
+   * @param {function} callback Response handler
+   * @param {function} errback Error handler
+   */
+  toggle: (checked, callback, errback) => {
+    axios.post('http://localhost:8080/todos/' + checked.id, {
+        state: checked.state
+      })
+      .then((res) => {
+        callback && callback(res);
+      }).catch((error) => {
+        errback && errback(error);
+      });
+  },
+
+  /**
+   * @returns {Object} List of ToDo items
+   */
+   getLists: () => {
+    return axios.get('http://localhost:8080/lists', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
     });
   },
 
   /**
- * Deletion of Todo Item
- * @param {Object} checked The updated state of the item and the ID being modified
- * @param {function} callback Response handler
- * @param {function} errback Error handler
- */
-   toggle: (checked, callback, errback) => {
-    axios.post('http://localhost:8080/todos/' + checked.id, { state: checked.state })
-    .then((res) => {
-      callback && callback(res);
-    }).catch((error) => {
-      errback && errback(error);
-    });
+   * Creation of new ToDo list
+   * @param {Object} name Name of the list
+   * @param {function} callback Response handler
+   * @param {function} errback Error handler
+   */
+  newList: (name, callback, errback) => {
+    axios.post('http://localhost:8080/lists/create', name)
+      .then((res) => {
+        callback && callback(res);
+      }).catch((error) => {
+        errback && errback(error);
+      });
   },
+
+  /**
+   * Deletion of Todo Item
+   * @param {String} id The id of the item to delete
+   * @param {function} callback Response handler
+   * @param {function} errback Error handler
+   */
+   deleteList: (id, callback, errback) => {
+    axios.delete('http://localhost:8080/lists/' + id)
+      .then((res) => {
+        callback && callback(res);
+      }).catch((error) => {
+        errback && errback(error);
+      });
+  },
+
 };
 
 export default todoDelegate;
