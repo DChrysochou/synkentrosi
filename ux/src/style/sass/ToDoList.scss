@@ -19,6 +19,24 @@
     justify-content: flex-start;
     margin-right: 5px;
 
+    .todo-tab-container {
+      .tab-delete {
+        @extend .icon-button-small;
+        position: absolute;
+        margin-left: -18px;
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+
+        &:hover { opacity: 1; }
+      }
+
+      &:hover {
+        .tab-delete {
+          opacity: 1;
+        }
+      }
+    }
+
     .todo-tab {
       text-orientation: upright;
       writing-mode: vertical-lr;
