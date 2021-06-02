@@ -3,7 +3,12 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 function Tab(props) {
   function switchList(e) {
-    let target = e.currentTarget;
+    let target = e.target;
+    if (target.classList.contains('todo-tab'))
+      target = target.parentNode;
+    else
+      return;
+
     props.switchList(target);
   }
 
