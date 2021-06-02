@@ -2,6 +2,7 @@ let express = require('express'),
     router = express.Router();
 
 let lists = require('../models/list-schema');
+let todo = require('../models/todo-schema');
 
 router.route('/').get(async (req, res) => {
   lists.find((error, data) => {
@@ -21,12 +22,17 @@ router.route('/create').post((req, res, next) => {
 });
 
 router.route('/:id').delete((req, res, next) => {
-  lists.findByIdAndDelete(req.params.id, (error, data) => {
-    if (error) return next(error)
-    else {
-      res.json(data);
-    }
-  })
+  // First delete all Todo items attached to that list
+  todo.deleteMany({'list' : req.params.id}, (error) => {
+    if (error) return next(error);
+
+    lists.findByIdAndDelete(req.params.id, (error, data) => {
+      if (error) return next(error)
+      else {
+        res.json(data);
+      }
+    })
+  });
 });
 
 module.exports = router;

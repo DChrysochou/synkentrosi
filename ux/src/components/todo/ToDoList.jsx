@@ -93,7 +93,7 @@ class ToDoList extends React.Component {
       completed: false,
       list: activeList._id
     },
-      (res) => { res.data && this.updateListWithChanges("todo"); },
+      (res) => { res.data && this.updateListWithChanges(); },
       (err) => { console.log(err); }
     );
   }
@@ -107,7 +107,7 @@ class ToDoList extends React.Component {
       id: idToUpdate,
       state: onOff
     },
-      (res) => { this.updateListWithChanges("todo"); },
+      (res) => { this.updateListWithChanges(); },
       (err) => { console.log(err); }
     );
   }
@@ -122,7 +122,7 @@ class ToDoList extends React.Component {
     let idToDelete = this.getIDToRemove(e);
     delegate.remove(
       idToDelete, 
-      (res) => { res.data && this.updateListWithChanges("todo"); },
+      (res) => { res.data && this.updateListWithChanges(); },
       (err) => { console.log(err); }
     );
   }
@@ -139,7 +139,13 @@ class ToDoList extends React.Component {
     let idToDelete = this.getIDToRemove(e);
     delegate.deleteList(
       idToDelete, 
-      (res) => { this.setState(prevState => ({ lists: prevState.lists.filter(list => list._id !== res.data._id) })); },
+      (res) => {
+        this.setState(prevState => ({ 
+          lists: prevState.lists.filter(list => list._id !== res.data._id),
+          activeList: this.state.lists[prevState.activeList]._id === res.data._id ? 0 : prevState.activeList
+        }));
+        this.updateListWithChanges();
+      },
       (err) => { console.log(err); }
     );
   }
