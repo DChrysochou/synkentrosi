@@ -11,7 +11,7 @@ class Flyout extends React.Component {
   }
 
   handleNameSubmit = (name) => {
-    this.props.hanleNameChange(name);
+    this.props.handleNameChange(name);
   }
 
   handleTodoListSubmit = (name) => {
