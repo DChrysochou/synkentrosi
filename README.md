@@ -1,5 +1,7 @@
 # Synkentrosi - Productivity Tool
-**Synkentrosi** (**συγκέντρωση** in Greek) translates to, essentially, "Mental concentration". Inspired by the fantastic Momentum Dashboard, the concept is the same (A page you can leave your browser on to remind you to focus), but tweaked to my preferences.
+**Synkentrosi** (**συγκέντρωση** in Greek) translates to, essentially, "Mental concentration". Inspired by the fantastic Momentum Dashboard, the concept is the same (A page you can leave your browser on to remind you to focus), but tweaked to my preferences. Mainly done to get more MERN stack experience.
+
+![Sample screenshot](https://raw.githubusercontent.com/dchrysochou/synkentrosi/master/SampleScreenshot.png)
 
 ## Requirements
 1. Docker
